@@ -53,8 +53,33 @@ Sample Quick Sort output, without and with shuffling:
 ![QuickSort no shuffle](screenshots/04-quicksort-noshuffle.png)
 ![QuickSort shuffle](screenshots/05-quicksort-shuffle.png)
 
+## Source code
+
+The full Java source is in [`src/`](src):
+
+| File | What it does |
+|------|-------------|
+| `Wine.java` | A record holding one wine's alcohol value |
+| `ImportData.java` | Loads unique alcohol values from the red & white wine CSVs |
+| `Timer.java` | Measures execution time in microseconds |
+| `Task1_BubbleSort.java` | Bubble Sort, optimised and non-optimised |
+| `Task2_InsertionSort.java` | Insertion Sort |
+| `Task3_MergeSort.java` | Merge Sort |
+| `Task4_QuickSort.java` | Quick Sort with four pivot strategies |
+
+Each `TaskN` file counts its own comparisons, swaps/shifts/merges, times the run, and prints the result both on the original and on a shuffled list.
+
+## Running it
+
+The data loader reads `winequality-red.csv` and `winequality-white.csv` from the classpath (the UCI Wine Quality Dataset, semicolon-separated). Put both CSVs where your classpath can find them, then:
+
+```bash
+javac -d out src/*.java
+java -cp out:path/to/resources Task4_QuickSort
+```
+
+Swap in `Task1_BubbleSort`, `Task2_InsertionSort` or `Task3_MergeSort` to run the others.
+
 ## Tech
 
 Java · Big-O complexity analysis · Wine Quality Dataset (Cortez et al., 2009)
-
-> The screenshots show the implementations and measured results. If you want the full runnable source, the `.java` files can be added to this repo.
