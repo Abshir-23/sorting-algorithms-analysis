@@ -40,6 +40,21 @@ Median-of-three was the most reliable, consistently producing the most balanced 
 - Merge Sort gives stable, predictable performance independent of input order
 - For Quick Sort the pivot choice matters a lot — median-of-three avoids the worst-case splits that a naive first-element pivot can hit on partially sorted data
 
+## Screenshots
+
+Implementations in Java (Bubble, Insertion, Merge Sort):
+
+![Bubble sort code](screenshots/01-bubblesort-code.png)
+![Insertion sort code](screenshots/02-insertionsort-code.png)
+![Merge sort code](screenshots/03-mergesort-code.png)
+
+Sample Quick Sort output, without and with shuffling:
+
+![QuickSort no shuffle](screenshots/04-quicksort-noshuffle.png)
+![QuickSort shuffle](screenshots/05-quicksort-shuffle.png)
+
 ## Tech
 
 Java · Big-O complexity analysis · Wine Quality Dataset (Cortez et al., 2009)
+
+> The screenshots show the implementations and measured results. If you want the full runnable source, the `.java` files can be added to this repo.
