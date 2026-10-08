@@ -1,6 +1,6 @@
 # Sorting Algorithms Analysis
 
-Implementing and benchmarking four sorting algorithms in Java on a real dataset. Final exam for PG4200 Algorithms and Data Structures at Kristiania.
+Implementing and benchmarking four sorting algorithms in Java on a real dataset.
 
 ## Overview
 
