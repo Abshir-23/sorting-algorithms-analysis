@@ -1,85 +1,85 @@
-# Sorting Algorithms Analysis
+# Analyse av sorteringsalgoritmer
 
-Implementing and benchmarking four sorting algorithms in Java on a real dataset.
+Implementering og ytelsestesting av fire sorteringsalgoritmer i Java på et ekte datasett.
 
-## Overview
+## Oversikt
 
-The task was to implement Bubble Sort, Insertion Sort, Merge Sort and Quick Sort from scratch, run them on a real dataset, and analyse how they behave with and without shuffling. The data was the **Wine Quality Dataset** — all unique alcohol values from the red and white wine CSV files, giving **111 unique values** to sort in ascending order.
+Oppgaven var å implementere Bubble Sort, Insertion Sort, Merge Sort og Quick Sort fra bunnen av, kjøre dem på et ekte datasett og analysere hvordan de oppfører seg med og uten stokking. Dataene var **Wine Quality Dataset**, alle unike alkoholverdier fra CSV-filene for rødvin og hvitvin, som gir **111 unike verdier** som skal sorteres i stigende rekkefølge.
 
-Each algorithm counts its own comparisons, swaps/shifts and merges so the theory can be checked against measured numbers.
+Hver algoritme teller sine egne sammenligninger, bytter/flyttinger og flettinger, slik at teorien kan sjekkes mot målte tall.
 
-## Results
+## Resultater
 
-**Bubble Sort** (non-optimised vs optimised with early-exit flag)
+**Bubble Sort** (ikke optimalisert og optimalisert med flagg for tidlig avslutning)
 
-| | Comparisons (no shuffle) | Comparisons (shuffle) |
+| | Sammenligninger (uten stokking) | Sammenligninger (med stokking) |
 |---|---|---|
-| Non-optimised | 6105 | 6105 |
-| Optimised | 5895 | 6105 |
+| Ikke optimalisert | 6105 | 6105 |
+| Optimalisert | 5895 | 6105 |
 
-The non-optimised version always does the same work (O(n²) in every case); the optimised version's `swapped` flag lets it finish early on near-sorted data — best case O(n).
+Den ikke optimaliserte versjonen gjør alltid like mye arbeid (O(n²) i alle tilfeller). I den optimaliserte versjonen gjør `swapped`-flagget at den kan avslutte tidlig på nesten sorterte data, beste tilfelle O(n).
 
-**Insertion Sort** — 2,711 comparisons without shuffle, 3,324 with shuffle. Sensitive to input order; best case O(n), average/worst O(n²).
+**Insertion Sort**: 2 711 sammenligninger uten stokking, 3 324 med stokking. Følsom for rekkefølgen på input; beste tilfelle O(n), gjennomsnitt og verste tilfelle O(n²).
 
-**Merge Sort** — exactly **110 merge operations** in both runs, regardless of order. Comparisons barely moved (599 → 615). Guaranteed O(n log n), insensitive to input order.
+**Merge Sort**: nøyaktig **110 flettinger** i begge kjøringene, uavhengig av rekkefølge. Antall sammenligninger endret seg nesten ikke (599 → 615). Garantert O(n log n) og upåvirket av rekkefølgen på input.
 
-**Quick Sort** — four pivot strategies compared:
+**Quick Sort**: fire strategier for valg av pivot ble sammenlignet:
 
-| Strategy | Comparisons (no shuffle) | Comparisons (shuffle) |
+| Strategi | Sammenligninger (uten stokking) | Sammenligninger (med stokking) |
 |---|---|---|
-| First element | 740 | 717 |
-| Last element | 685 | 719 |
-| Random | 752 | 798 |
-| Median of three | **665** | **607** |
+| Første element | 740 | 717 |
+| Siste element | 685 | 719 |
+| Tilfeldig | 752 | 798 |
+| Median av tre | **665** | **607** |
 
-Median-of-three was the most reliable, consistently producing the most balanced splits and the fewest comparisons.
+Median av tre var den mest stabile, og ga jevnt over de mest balanserte delingene og færrest sammenligninger.
 
-## Key takeaways
+## Viktigste lærdommer
 
-- The simple O(n²) algorithms (Bubble, Insertion) are very sensitive to how ordered the input is
-- Merge Sort gives stable, predictable performance independent of input order
-- For Quick Sort the pivot choice matters a lot — median-of-three avoids the worst-case splits that a naive first-element pivot can hit on partially sorted data
+- De enkle O(n²)-algoritmene (Bubble, Insertion) er svært følsomme for hvor sortert input allerede er
+- Merge Sort gir stabil og forutsigbar ytelse uavhengig av rekkefølgen på input
+- For Quick Sort betyr valget av pivot mye: median av tre unngår de dårligste delingene som en naiv pivot på første element kan få på delvis sorterte data
 
-## Screenshots
+## Skjermbilder
 
-Implementations in Java (Bubble, Insertion, Merge Sort):
+Implementasjoner i Java (Bubble, Insertion, Merge Sort):
 
-![Bubble sort code](screenshots/01-bubblesort-code.png)
-![Insertion sort code](screenshots/02-insertionsort-code.png)
-![Merge sort code](screenshots/03-mergesort-code.png)
+![Kode for Bubble Sort](screenshots/01-bubblesort-code.png)
+![Kode for Insertion Sort](screenshots/02-insertionsort-code.png)
+![Kode for Merge Sort](screenshots/03-mergesort-code.png)
 
-Sample Quick Sort output, without and with shuffling:
+Eksempel på utskrift fra Quick Sort, uten og med stokking:
 
-![QuickSort no shuffle](screenshots/04-quicksort-noshuffle.png)
-![QuickSort shuffle](screenshots/05-quicksort-shuffle.png)
+![Quick Sort uten stokking](screenshots/04-quicksort-noshuffle.png)
+![Quick Sort med stokking](screenshots/05-quicksort-shuffle.png)
 
-## Source code
+## Kildekode
 
-The full Java source is in [`src/`](src):
+Hele Java-koden ligger i [`src/`](src):
 
-| File | What it does |
+| Fil | Hva den gjør |
 |------|-------------|
-| `Wine.java` | A record holding one wine's alcohol value |
-| `ImportData.java` | Loads unique alcohol values from the red & white wine CSVs |
-| `Timer.java` | Measures execution time in microseconds |
-| `Task1_BubbleSort.java` | Bubble Sort, optimised and non-optimised |
+| `Wine.java` | En record som holder alkoholverdien til én vin |
+| `ImportData.java` | Laster inn unike alkoholverdier fra CSV-filene for rødvin og hvitvin |
+| `Timer.java` | Måler kjøretid i mikrosekunder |
+| `Task1_BubbleSort.java` | Bubble Sort, optimalisert og ikke optimalisert |
 | `Task2_InsertionSort.java` | Insertion Sort |
 | `Task3_MergeSort.java` | Merge Sort |
-| `Task4_QuickSort.java` | Quick Sort with four pivot strategies |
+| `Task4_QuickSort.java` | Quick Sort med fire pivotstrategier |
 
-Each `TaskN` file counts its own comparisons, swaps/shifts/merges, times the run, and prints the result both on the original and on a shuffled list.
+Hver `TaskN`-fil teller sine egne sammenligninger, bytter/flyttinger/flettinger, tar tiden på kjøringen og skriver ut resultatet både for den opprinnelige og en stokket liste.
 
-## Running it
+## Kjøre det
 
-The data loader reads `winequality-red.csv` and `winequality-white.csv` from the classpath (the UCI Wine Quality Dataset, semicolon-separated). Put both CSVs where your classpath can find them, then:
+Datainnlasteren leser `winequality-red.csv` og `winequality-white.csv` fra classpath (UCI Wine Quality Dataset, semikolonseparert). Legg begge CSV-filene der classpath finner dem, og kjør:
 
 ```bash
 javac -d out src/*.java
-java -cp out:path/to/resources Task4_QuickSort
+java -cp out:sti/til/ressurser Task4_QuickSort
 ```
 
-Swap in `Task1_BubbleSort`, `Task2_InsertionSort` or `Task3_MergeSort` to run the others.
+Bytt til `Task1_BubbleSort`, `Task2_InsertionSort` eller `Task3_MergeSort` for å kjøre de andre.
 
-## Tech
+## Teknologi
 
-Java · Big-O complexity analysis · Wine Quality Dataset (Cortez et al., 2009)
+Java · Analyse av Big O-kompleksitet · Wine Quality Dataset (Cortez mfl., 2009)
